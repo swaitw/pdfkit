@@ -16,13 +16,13 @@ describe('PDFDocument', () => {
     test('not defined', () => {
       new PDFDocument();
 
-      expect(fontSpy).toBeCalledWith('Helvetica');
+      expect(fontSpy).toBeCalledWith('Helvetica', null);
     });
 
     test('a string value', () => {
       new PDFDocument({ font: 'Roboto' });
 
-      expect(fontSpy).toBeCalledWith('Roboto');
+      expect(fontSpy).toBeCalledWith('Roboto', null);
     });
 
     test('a falsy value', () => {
@@ -54,12 +54,12 @@ describe('PDFDocument', () => {
     doc.end();
 
     let catalog = data[data.length-28];
-    
+
     expect(catalog).toContain('/Metadata');
   });
 
   test('metadata is NOT present for PDF 1.3', () => {
-    let doc = new PDFDocument({pdfVersion: '1.3'}); 
+    let doc = new PDFDocument({pdfVersion: '1.3'});
     const data = logData(doc);
     doc.end();
 
